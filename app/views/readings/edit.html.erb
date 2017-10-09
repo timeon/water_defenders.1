@@ -1,6 +1,5 @@
-<h1>Editing reading</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @reading %> |
-<%= link_to 'Back', readings_path %>
+<%- model_class = Reading -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Reading %></h1>
+</div>
+<%= render :partial => 'form' %>

@@ -1,24 +1,28 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Reading -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Reading %></h1>
+</div>
 
-<p>
-  <strong>Read at:</strong>
-  <%= @reading.read_at %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:read_at) %></dt>
+      <dd><pre class="prettyprint"><%= @reading.read_at %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:value) %></dt>
+      <dd><pre class="prettyprint"><%= @reading.value %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:unit) %></dt>
+      <dd><pre class="prettyprint"><%= @reading.unit %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Value:</strong>
-  <%= @reading.value %>
-</p>
+<div class="form-group">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              readings_path, :class => 'btn btn-default'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_reading_path(@reading), :class => 'btn btn-default' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              reading_path(@reading),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
 
-<p>
-  <strong>Unit:</strong>
-  <%= @reading.unit %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @reading.user %>
-</p>
-
-<%= link_to 'Edit', edit_reading_path(@reading) %> |
-<%= link_to 'Back', readings_path %>
