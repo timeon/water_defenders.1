@@ -1,6 +1,5 @@
-<h1>Editing tracking</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @tracking %> |
-<%= link_to 'Back', trackings_path %>
+<%- model_class = Tracking -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Tracking %></h1>
+</div>
+<%= render :partial => 'form' %>
