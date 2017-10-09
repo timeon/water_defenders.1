@@ -29,6 +29,7 @@ class TrackingsController < ApplicationController
   # POST /trackings.json
   def create
     @tracking = Tracking.new(tracking_params)
+    @tracking.user = current_user
 
     respond_to do |format|
       if @tracking.save
