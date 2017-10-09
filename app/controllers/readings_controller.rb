@@ -29,6 +29,7 @@ class ReadingsController < ApplicationController
   # POST /readings.json
   def create
     @reading = Reading.new(reading_params)
+    @reading.user = current_user
 
     respond_to do |format|
       if @reading.save
