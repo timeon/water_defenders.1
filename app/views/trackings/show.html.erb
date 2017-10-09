@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @tracking.area %>
+</p>
+
+<p>
+  <strong>Usage:</strong>
+  <%= @tracking.usage %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @tracking.value %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @tracking.unit %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tracking.user %>
+</p>
+
+<%= link_to 'Edit', edit_tracking_path(@tracking) %> |
+<%= link_to 'Back', trackings_path %>
