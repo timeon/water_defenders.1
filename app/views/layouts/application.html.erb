@@ -11,8 +11,11 @@
 <%= render partial: "elements/navbar" %>
 <%= bootstrap_flash %>
 
-
-<%= yield %>
+<div id="content">
+  <div class="container">
+	  <%= yield %>
+  </div>
+</div>
 
 </body>
 </html>

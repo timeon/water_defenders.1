@@ -1,34 +1,17 @@
-<%= form_for @tracking, :html => { :class => 'form-horizontal form-model' } do |f| %>
-  <div class="form-group">
-    <%= f.label :area, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :area, :class => 'text-field form-control' %>
-    </div>
+<div class="row">
+  <div class="col-xs-offset-1 col-xs-10">
+    <%= simple_form_for @tracking, :html => { :class => 'form-horizontal form-model' } do |f| %>
+      <%= f.input :area,collection:["Kitchen","Sanitary","Outdoors","Other"], label:'Zone' %>
+      <%= f.input :usage,collection:["Dishwasher","Sink","Toilet","Shower/Bath","Laundry","Sprinklers","Car Wash"] %>
+      <%= f.input :value, input_html: { min: '1', step: 'any' } %>
+      <%= f.input :unit,collection:["Runs(Dishwasher,Laundry)","Min(Sink, Shower/Bath, Sprinklers)","Flushes(Toilet)"] %>
+      <div class="form-group">
+        <div class='col-md-offset-2 col-md-10'>
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      trackings_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="form-group">
-    <%= f.label :usage, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :usage, :class => 'text-field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :value, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.number_field :value, :class => 'text-field form-control' %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :unit, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :unit, :class => 'text-field form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class='col-md-offset-2 col-md-10'>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  trackings_path, :class => 'btn btn-default' %>
-    </div>
-  </div>
-<% end %>
+</div>

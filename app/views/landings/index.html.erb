@@ -1,2 +1,29 @@
-<h1>Landings#index</h1>
-<p>Find me in app/views/landings/index.html.erb</p>
+<div style="margin-top:00px">
+  <img src="/water_defender_logo.png" alt="Water Defender"   class="center-block img-responsive">
+	
+</div>
+<br>
+<br>
+
+<table class="table" width="50%">
+	<tr>
+		<th>Ranking</th>
+		<th>Name</th>
+		<th>Daily Usage</th>
+		<th>Unit</th>
+	</tr>
+   
+    <% i=1 %>
+
+	<% User.leaders[0..2].each do |user| %>
+      <tr>
+      	<td> <%= i %> </td>
+      	<td><%= user.username %></td>
+      	<td><%= user.daily_usage %></td>
+      	<td>CF</td>
+      </tr>
+      <% i=i+1 %>
+
+	 <% end %>
+
+</table>

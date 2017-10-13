@@ -8,7 +8,7 @@ class ReadingsController < ApplicationController
   # GET /readings
   # GET /readings.json
   def index
-    @readings = Reading.all
+    @readings = current_user.readings
   end
 
   # GET /readings/1
@@ -33,7 +33,7 @@ class ReadingsController < ApplicationController
 
     respond_to do |format|
       if @reading.save
-        format.html { redirect_to @reading, notice: 'Reading was successfully created.' }
+        format.html { redirect_to readings_path, notice: 'Reading was successfully created.' }
         format.json { render :show, status: :created, location: @reading }
       else
         format.html { render :new }

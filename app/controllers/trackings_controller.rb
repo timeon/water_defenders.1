@@ -8,7 +8,7 @@ class TrackingsController < ApplicationController
   # GET /trackings
   # GET /trackings.json
   def index
-    @trackings = Tracking.all
+    @trackings = current_user.trackings
   end
 
   # GET /trackings/1
@@ -33,7 +33,7 @@ class TrackingsController < ApplicationController
 
     respond_to do |format|
       if @tracking.save
-        format.html { redirect_to @tracking, notice: 'Tracking was successfully created.' }
+        format.html { redirect_to trackings_path, notice: 'Tracking was successfully created.' }
         format.json { render :show, status: :created, location: @tracking }
       else
         format.html { render :new }

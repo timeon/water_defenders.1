@@ -28,5 +28,20 @@ class User < ActiveRecord::Base
                 password: Devise.friendly_token[0,20])
   end
 
+  def daily_usage
+    usage = (self.readings.last.value- self.readings.first.value)
+    days = ((self.readings.last.read_at-self.readings.first.read_at)/3600/24)
+    (usage/days*100).round/100.0
+  end
+
+  def self.leaders
+      User.all.sort_by(&:daily_usage)
+  end
+
+
+  def username
+      self.email.split("@").first
+  end
+
 
 end
