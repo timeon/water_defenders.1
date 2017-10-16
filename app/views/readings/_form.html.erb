@@ -1,4 +1,4 @@
-<%= form_for @reading, :html => { :class => 'form-horizontal form-model' } do |f| %>
+<%= simple_form_for @reading, :html => { :class => 'form-horizontal form-model' } do |f| %>
   <div class="form-group">
     <%= f.label :read_at, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
@@ -6,15 +6,13 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :value, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
-      <%= f.number_field :value, :class => 'text-field form-control' %>
+      <%= f.input :value, :class => 'text-field form-control' %>
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :unit, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
-      <%= f.text_field :unit, :class => 'text-field form-control' %>
+      <%= f.input :unit,collection:["Cubic Feet","Gallon"],include_blank:false, :class => 'text-field form-control' %>
     </div>
   </div>
 
