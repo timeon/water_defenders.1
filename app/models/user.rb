@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def self.leaders
-      User.all.sort_by(&:daily_usage)
+      User.joins(:readings).select("DISTINCT users.*").all.sort_by(&:daily_usage)
   end
 
 
