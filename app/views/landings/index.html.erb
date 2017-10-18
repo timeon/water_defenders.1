@@ -15,15 +15,16 @@
    
     <% i=1 %>
 
-	<% User.leaders[0..2].each do |user| %>
-      <tr>
-      	<td> <%= i %> </td>
-      	<td><%= user.username %></td>
-      	<td><%= user.daily_usage %></td>
-      	<td>CF</td>
-      </tr>
-      <% i=i+1 %>
-
+	<% User.leaders.each do |user| %>
+	  <% if user.daily_usage > 0 %>
+	      <tr>
+	      	<td> <%= i %> </td>
+	      	<td><%= user.username %></td>
+	      	<td><%= user.daily_usage %></td>
+	      	<td>CF</td>
+	      </tr>
+	      <% i=i+1 %>
+	   <% end %>
 	 <% end %>
 
 </table>

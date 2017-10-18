@@ -30,12 +30,13 @@ class User < ActiveRecord::Base
 
   def daily_usage
     usage = (self.readings.last.value- self.readings.first.value)
-    days = ((self.readings.last.read_at-self.readings.first.read_at)/3600/24)
+    days = ((self.readings.last.read_at-self.readings.first.read_at)/60/60/24)
     (usage/days*100).round/100.0
   end
 
   def self.leaders
-      User.joins(:readings).select("DISTINCT users.*").all.sort_by(&:daily_usage)
+      leaders = User.all.to_a.delete_if {|user| user.readings.count < 2}
+      leaders.sort_by(&:daily_usage)
   end
 
 
