@@ -45,4 +45,11 @@ class User < ActiveRecord::Base
   end
 
 
+  def masked_username
+    mask=username
+    range=4..username.size
+    mask[range]='*'*range.size
+    mask
+  end
+
 end

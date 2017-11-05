@@ -53,6 +53,7 @@ gem 'bootstrap-sass-extras'
 gem 'binding_of_caller'
 gem 'google-analytics-rails'
 gem 'delayed_job_active_record'
+gem 'browser-timezone-rails'
 
 group :development, :test do
   gem 'rspec-rails'
