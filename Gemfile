@@ -54,6 +54,9 @@ gem 'binding_of_caller'
 gem 'google-analytics-rails'
 gem 'delayed_job_active_record'
 gem 'browser-timezone-rails'
+gem 'country_select'
+gem 'country_state_select'
+
 
 group :development, :test do
   gem 'rspec-rails'
