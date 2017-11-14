@@ -8,7 +8,11 @@ class ReadingsController < ApplicationController
   # GET /readings
   # GET /readings.json
   def index
-    @readings = current_user.readings
+    if current_user.role == "admin"
+      @readings = Reading.all
+    else
+      @readings = current_user.readings
+    end
   end
 
   # GET /readings/1

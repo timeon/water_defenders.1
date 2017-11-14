@@ -28,17 +28,39 @@ class User < ActiveRecord::Base
                 password: Devise.friendly_token[0,20])
   end
 
+  def days
+    (self.readings.last.read_at-self.readings.first.read_at)/60/60/24
+  end
+
+  MLS =
+  {"Cubic Feet": 28317,
+  "Gallons": 3785,
+  "Liters": 1000,
+  "Cubic Meters": 1000000,
+  "Kiloliters": 1000000}
+
   def daily_usage
     usage = (self.readings.last.value- self.readings.first.value)
-    days = ((self.readings.last.read_at-self.readings.first.read_at)/60/60/24)
     (usage/days*100).round/100.0
   end
 
+  def daily_mls
+    debugger
+    mls = daily_usage*MLS[unit.to_sym]
+  end
+    
   def self.leaders
-      leaders = User.all.to_a.delete_if {|user| user.readings.count < 2}
-      leaders.sort_by(&:daily_usage)
+      leaders = User.all.to_a.delete_if {|user| user.readings.count < 2 or user.days < 1}
+      leaders.sort_by(&:daily_mls)
   end
 
+  def unit
+    if  self.readings.count ==0
+      unit = MLS.keys.first.to_s
+    else
+      unit = self.readings.last.unit
+    end
+  end
 
   def username
       self.email.split("@").first

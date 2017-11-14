@@ -5,30 +5,80 @@
 <br>
 <br>
 
-<table class="table" width="50%">
-	<tr>
-		<th>Ranking</th>
-		<th>Name</th>
-		<th>Daily Usage</th>
-		<th>Unit</th>
-	</tr>
-   
-    <% i=1 %>
 
-	<% User.leaders.each do |user| %>
-	  <% if user.daily_usage > 0 %>
-	      <tr>
-	      	<td> <%= i %> </td>
-	      	<td><%= user.masked_username %></td>
-	      	<td><%= user.daily_usage %></td>
-	      	<td>CF</td>
-	      </tr>
-	      <% i=i+1 %>
-	   <% end %>
-	 <% end %>
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table" width="50%">
+      <tr>
+        <th>Ranking</th>
+        <th>Name</th>
+        <th>Daily Usage</th>
+        <th>Unit</th>
+      </tr>
+       
+        <% i=1 %>
 
-</table>
+      <% User.leaders.each do |user| %>
+        <% if user.daily_usage > 0 %>
+            <tr>
+              <td> <%= i %> </td>
+              <td><%= user.masked_username %></td>
+              <td><%= (user.daily_mls / User::MLS[@unit.to_sym]).round(2) %></td>
+              <td><%= @unit %></td>
+            </tr>
+            <% i=i+1 %>
+         <% end %>
+       <% end %>
+    </table>
+  </div>
 
+
+  <div class="col-lg-1">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Country
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">U.S.</a></li>
+        <li><a href="#">China</a></li>
+        <li><a href="#">India</a></li>
+        <li><a href="#">Canada</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-lg-2">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        State/Province
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">California</a></li>
+        <li><a href="#">Arizona</a></li>
+        <li><a href="#">New York</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-lg-1">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Zip Code
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">92129</a></li>
+        <li><a href="#">92128</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</div>
+
+  
 
 <div class="jumbotron">
   <h1 class="display-3 text-center">Are You Better At Saving Water Than Your Neighbors?</h1>
