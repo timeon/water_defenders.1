@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
   
@@ -22,5 +23,12 @@ class ApplicationController < ActionController::Base
       redirect_to fallback_redirect, flash: {error: "You must be signed in to view this page."}
     end
   end
+
+  def configure_permitted_parameters
+    keys = [:name, :country, :state, :zip_code, :email, :password, :password_confirmation, :househould_size]
+    devise_parameter_sanitizer.permit(:sign_up,        keys:keys)
+    devise_parameter_sanitizer.permit(:account_update, keys:keys)
+  end
+
 
 end

@@ -18,7 +18,7 @@
        
         <% i=1 %>
 
-      <% User.leaders.each do |user| %>
+      <% @leaders.each do |user| %>
         <% if user.daily_usage > 0 %>
             <tr>
               <td> <%= i %> </td>
@@ -40,10 +40,12 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">U.S.</a></li>
-        <li><a href="#">China</a></li>
-        <li><a href="#">India</a></li>
-        <li><a href="#">Canada</a></li>
+        <li><a href="/?country=US">US</a></li>
+        <li><a href="/?country=china">China</a></li>
+        <li><a href="/?country=india">India</a></li>
+        <li><a href="/?country=canada">Canada</a></li>
+        <li><a href="/">Worldwide</a></li>
+
       </ul>
     </div>
   </div>

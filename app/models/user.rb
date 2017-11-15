@@ -45,12 +45,17 @@ class User < ActiveRecord::Base
   end
 
   def daily_mls
-    debugger
     mls = daily_usage*MLS[unit.to_sym]
   end
     
-  def self.leaders
-      leaders = User.all.to_a.delete_if {|user| user.readings.count < 2 or user.days < 1}
+  def self.leaders(params=nil)
+      if params[:country].present?
+        leaders = User.all.where(country:params[:country])
+      else
+        leaders = User.all
+      end
+
+      leaders = leaders.to_a.delete_if {|user| user.readings.count < 2 or user.days < 1}
       leaders.sort_by(&:daily_mls)
   end
 

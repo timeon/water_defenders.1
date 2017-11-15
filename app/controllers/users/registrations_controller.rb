@@ -12,4 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit
     super
   end
+
+  def user_params
+    params.require(:user).permit(:name, :country, :state, :zip_code, :email, :password, :password_confirmation)
+  end
+
 end
