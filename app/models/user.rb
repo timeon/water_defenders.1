@@ -37,7 +37,9 @@ class User < ActiveRecord::Base
   "Gallons": 3785,
   "Liters": 1000,
   "Cubic Meters": 1000000,
-  "Kiloliters": 1000000}
+  "Kiloliters": 1000000,
+  "Kilogallons(Kgals)":3785000,
+  "Hundred Cubic Feet(CCF/HCF)":2831700}
 
   def daily_usage
     usage = (self.readings.last.value- self.readings.first.value)
@@ -51,6 +53,10 @@ class User < ActiveRecord::Base
   def self.leaders(params=nil)
       if params[:country].present?
         leaders = User.all.where(country:params[:country])
+      elsif params[:state].present?
+        leaders = User.all.where(state:params[:state])
+      elsif params[:zip_code].present?
+        leaders = User.all.where(zip_code:params[:zip_code])
       else
         leaders = User.all
       end
@@ -74,9 +80,9 @@ class User < ActiveRecord::Base
 
   def masked_username
     mask=username
-    range=4..username.size
+    range=username.size-2..username.size
     mask[range]='*'*range.size
-    mask
+    name || mask
   end
 
 end

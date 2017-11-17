@@ -32,7 +32,6 @@
     </table>
   </div>
 
-
   <div class="col-lg-1">
     <div class="dropdown">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -40,12 +39,10 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="/?country=US">US</a></li>
-        <li><a href="/?country=china">China</a></li>
-        <li><a href="/?country=india">India</a></li>
-        <li><a href="/?country=canada">Canada</a></li>
+        <% User.where.not(country:nil).uniq.pluck(:country).each do |country| %>
+          <li><a href="/?country=<%=country%>"><%=ISO3166::Country[country]%></a></li>
+        <% end %>  
         <li><a href="/">Worldwide</a></li>
-
       </ul>
     </div>
   </div>
@@ -57,9 +54,11 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">California</a></li>
-        <li><a href="#">Arizona</a></li>
-        <li><a href="#">New York</a></li>
+        <% if @country %>
+          <% User.where(country:@country).where.not(state:nil).uniq.pluck(:state).each do |state| %>
+            <li><a href="/?state=<%=state%>"> <%=ISO3166::Country[@country].states[state].name%> </a></li>
+          <% end %>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -71,8 +70,9 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li><a href="#">92129</a></li>
-        <li><a href="#">92128</a></li>
+        <% User.where(country:@country).where.not(zip_code:nil).uniq.pluck(:zip_code).each do |zip_code| %>
+          <li><a href="/?zip_code=<%=zip_code%>"><%=zip_code%></a></li>
+        <% end %>
       </ul>
     </div>
   </div>

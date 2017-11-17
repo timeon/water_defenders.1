@@ -7,6 +7,7 @@ class LandingsController < ApplicationController
     end
 
    @leaders=User.leaders(params)
+   @country = params[:country]
 
   end
 end

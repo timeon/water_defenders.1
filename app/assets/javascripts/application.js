@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require chosen-jquery
 
 //= require_tree .
 //= require js.cookie
 //= require jstz
 //= require browser_timezone_rails/set_time_zone
+
